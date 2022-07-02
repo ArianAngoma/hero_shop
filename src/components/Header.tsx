@@ -3,18 +3,33 @@ import { MdShoppingBasket } from 'react-icons/md'
 import { motion } from 'framer-motion'
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
 
-import { app } from '../configs/firebase'
-
 import Logo from './img/logo.png'
 import Avatar from './img/avatar.png'
 
+import { app } from '../configs/firebase'
+import { useStateValue } from '../context/StateProvider'
+import { actionTypes } from '../context/reducer'
+
 export const Header = () => {
+  const [{ user }, dispatch] = useStateValue()
+
+  console.log(user)
+
   const firebaseAuth = getAuth(app)
   const provider = new GoogleAuthProvider()
 
   const handleLogin = async () => {
-    const responseAuth = await signInWithPopup(firebaseAuth, provider)
-    console.log(responseAuth)
+    const {
+      user: {
+        // refreshToken,
+        providerData
+      }
+    } = await signInWithPopup(firebaseAuth, provider)
+
+    dispatch({
+      type: actionTypes.SET_USER,
+      user: providerData[0]
+    })
   }
 
   return (

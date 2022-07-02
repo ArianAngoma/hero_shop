@@ -1,14 +1,22 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import './index.css'
-
+import ReactDOM from 'react-dom/client'
 import { BrowserRouter as Router } from 'react-router-dom'
 
-import { App } from './App'
+import './index.css'
 
-ReactDOM.render(
+import { App } from './App'
+import { StateProvider } from './context/StateProvider'
+import { initialState } from './context/InitialState'
+import { reducer } from './context/reducer'
+
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement
+)
+
+root.render(
   <Router>
-    <App/>
-  </Router>,
-  document.getElementById('root')
+    <StateProvider initialState={initialState} reducer={reducer}>
+      <App/>
+    </StateProvider>
+  </Router>
 )
