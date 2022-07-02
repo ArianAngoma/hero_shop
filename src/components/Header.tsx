@@ -1,20 +1,36 @@
+import { Link } from 'react-router-dom'
 import { MdShoppingBasket } from 'react-icons/md'
+import { motion } from 'framer-motion'
+import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
+
+import { app } from '../configs/firebase'
 
 import Logo from './img/logo.png'
 import Avatar from './img/avatar.png'
 
 export const Header = () => {
+  const firebaseAuth = getAuth(app)
+  const provider = new GoogleAuthProvider()
+
+  const handleLogin = async () => {
+    const responseAuth = await signInWithPopup(firebaseAuth, provider)
+    console.log(responseAuth)
+  }
+
   return (
     <header className="fixed z-50 w-screen p-6 px-16">
       <div className="hidden md:flex w-full h-full items-center justify-between">
-        <div className="flex items-center gap-2">
+        <Link
+          className="flex items-center gap-2"
+          to={'/'}
+        >
           <img
             src={Logo}
             alt="logo"
             className="w-8 object-cover"
           />
           <p className="text-headingColor text-xl font-bold">Arian Shop</p>
-        </div>
+        </Link>
 
         <div className="flex items-center gap-8">
           <ul className="flex items-center gap-8">
@@ -41,11 +57,18 @@ export const Header = () => {
             </div>
           </div>
 
-          <img
-            src={Avatar}
-            alt="user"
-            className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-xl"
-          />
+          <div className="relative">
+            <motion.img
+              src={Avatar}
+              alt="user"
+              className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-xl cursor-pointer"
+              whileTap={{
+                scale: 0.6
+              }}
+
+              onClick={handleLogin}
+            />
+          </div>
         </div>
       </div>
 
