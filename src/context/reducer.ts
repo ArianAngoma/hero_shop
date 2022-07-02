@@ -5,7 +5,7 @@ export interface IState {
 }
 
 export type IAction =
-  | { type: string; user: IInitialStateUser }
+  | { type: string; user: IInitialStateUser | null }
 
 export const actionTypes: { [x: string]: string } = {
   SET_USER: 'SET_USER'
