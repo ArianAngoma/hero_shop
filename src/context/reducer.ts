@@ -1,17 +1,14 @@
-import { IInitialState as IInitialStateUser } from './InitialState'
-
 export interface IState {
   user: any
+  productItems: any
 }
-
-export type IAction =
-  | { type: string; user: IInitialStateUser | null }
 
 export const actionTypes: { [x: string]: string } = {
-  SET_USER: 'SET_USER'
+  SET_USER: 'SET_USER',
+  SET_PRODUCTS_ITEMS: 'SET_PRODUCTS_ITEMS'
 }
 
-export const reducer = (state: IState, action: IAction): IState => {
+export const reducer = (state: IState, action: any): IState => {
   switch (action.type) {
     case actionTypes.SET_USER:
       return {

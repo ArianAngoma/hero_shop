@@ -1,12 +1,12 @@
 import { createContext, Dispatch, ReactNode, useContext, useReducer } from 'react'
-import { IAction as IActionProvider, IState as IStateProvider } from './reducer'
+import { IState as IStateProvider } from './reducer'
 import { IInitialState as InitialStateProvider } from './InitialState'
 
-export const StateContext = createContext({} as [IStateProvider, Dispatch<IActionProvider>])
+export const StateContext = createContext({} as [IStateProvider, Dispatch<any>])
 
 interface IProps {
-  reducer: (state: IStateProvider, action: IActionProvider) => IStateProvider
-  initialState: { user: InitialStateProvider | null }
+  reducer: (state: IStateProvider, action: any) => IStateProvider
+  initialState: InitialStateProvider
   children: ReactNode
 }
 
@@ -20,4 +20,4 @@ export const StateProvider = ({
   </StateContext.Provider>
 )
 
-export const useStateValue = (): [IStateProvider, ((value: IActionProvider) => void)] => useContext(StateContext)
+export const useStateValue = (): [IStateProvider, ((value: any) => void)] => useContext(StateContext)

@@ -1,6 +1,6 @@
 import { fetchUser } from '../utils/fetchLocalStorage'
 
-export interface IInitialState {
+export interface IUserState {
   displayName: string | null;
   email: string | null;
   phoneNumber: string | null;
@@ -9,8 +9,14 @@ export interface IInitialState {
   uid: string | null;
 }
 
+export interface IInitialState {
+  user: IUserState;
+  productItems: any;
+}
+
 const userInfo = fetchUser()
 
-export const initialState: { user: IInitialState | null } = {
-  user: userInfo
+export const initialState: IInitialState = {
+  user: userInfo,
+  productItems: null
 }
