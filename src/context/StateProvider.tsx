@@ -15,6 +15,7 @@ export const StateProvider = ({
   initialState,
   children
 }: IProps) => (
+  // @ts-ignore
   <StateContext.Provider value={useReducer(reducer, initialState)}>
     {children}
   </StateContext.Provider>

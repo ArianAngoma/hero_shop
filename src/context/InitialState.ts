@@ -1,4 +1,4 @@
-import { fetchUser } from '../utils/fetchLocalStorage'
+import { fetchUser, fetchCart } from '../utils/fetchLocalStorage'
 
 export interface IUserState {
   displayName: string | null;
@@ -10,13 +10,18 @@ export interface IUserState {
 }
 
 export interface IInitialState {
-  user: IUserState;
-  productItems: any;
+  user: IUserState
+  productItems: any
+  cartShow: boolean
+  cartItems: any
 }
 
 const userInfo = fetchUser()
+const cartInfo = fetchCart()
 
 export const initialState: IInitialState = {
   user: userInfo,
-  productItems: null
+  productItems: null,
+  cartShow: false,
+  cartItems: cartInfo
 }
